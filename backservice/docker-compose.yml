@@ -1,0 +1,29 @@
+services:
+  app:
+    build: .
+    container_name: symfony_app
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - database
+
+  database:
+    image: mysql:8.0
+    container_name: mybank_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ""
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: mybank  # Nom de la base de données
+      MYSQL_USER: symfony  # Nom d'utilisateur
+      MYSQL_PASSWORD: ""  # Pas de mot de passe
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - database_data:/var/lib/mysql
+    ports:
+      - "3307:3306"  # Port MySQL
+
+volumes:
+  database_data:
