@@ -1,5 +1,5 @@
 # Utilisation de l'image PHP 8.0 avec Apache
-FROM php:8.2.12-apache
+FROM php:8.0.0-apache
 
 # Installation des dépendances nécessaires
 RUN apt-get update && apt-get install -y \
